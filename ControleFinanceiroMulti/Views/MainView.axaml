@@ -1,0 +1,158 @@
+
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ControleFinanceiroMulti.ViewModels"
+             x:Class="ControleFinanceiroMulti.Views.MainView"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:DataType="vm:MainViewModel">
+
+    <UserControl.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="MinHeight" Value="48" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style Selector="ComboBox">
+            <Setter Property="MinHeight" Value="48" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style Selector="Button">
+            <Setter Property="MinHeight" Value="48" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+    </UserControl.Styles>
+
+    <Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer>
+        <Grid Margin="16"
+              HorizontalAlignment="Center"
+              MaxWidth="700">
+            <StackPanel Spacing="16">
+
+                <!-- Título -->
+                <TextBlock Text="Controle Financeiro"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center" />
+
+                <!-- Saldo atual -->
+                <Border Padding="18"
+                        CornerRadius="12"
+                        Background="#E8F5E9">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Saldo atual"
+                                   Foreground="#2E7D32" />
+                        <TextBlock Text="{Binding SaldoAtual}"
+                                   FontSize="30"
+                                   FontWeight="Bold"
+                                   Foreground="#1B5E20"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Receitas e despesas -->
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="10">
+                    <Border Grid.Column="0"
+                            Padding="12"
+                            CornerRadius="10"
+                            Background="#E3F2FD">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Receitas"
+                                       Foreground="#1565C0" />
+                            <TextBlock Text="{Binding TotalReceitas}"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="#0D47A1"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Padding="12"
+                            CornerRadius="10"
+                            Background="#FFEBEE">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Despesas"
+                                       Foreground="#C62828" />
+                            <TextBlock Text="{Binding TotalDespesas}"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="#B71C1C"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Cadastro -->
+                <TextBlock Text="Nova movimentação"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Margin="0,8,0,0" />
+
+                <TextBox PlaceholderText="Descrição"
+                         Text="{Binding Descricao}" />
+
+                <TextBox PlaceholderText="Valor (ex.: 150,00)"
+                         Text="{Binding ValorTexto}" />
+
+                
+                <ComboBox SelectedIndex="{Binding TipoSelecionado}">
+                    <ComboBoxItem Content="Despesa" />
+                    <ComboBoxItem Content="Receita" />
+                </ComboBox>
+
+                <TextBlock Text="Categoria"
+                        FontWeight="Bold" />
+
+                <ComboBox ItemsSource="{Binding Categorias}"
+                        SelectedItem="{Binding CategoriaSelecionada}" />
+
+                <Button Content="Cadastrar movimentação"
+                        Command="{Binding CadastrarCommand}"
+                        HorizontalAlignment="Stretch" />
+
+                <TextBlock Text="{Binding Mensagem}"
+                           TextWrapping="Wrap" />
+
+                <!-- Lista -->
+                <TextBlock Text="Movimentações"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Margin="0,8,0,0" />
+
+                <ListBox ItemsSource="{Binding Movimentacoes}"
+                         SelectedItem="{Binding MovimentacaoSelecionada}"
+                         MinHeight="100">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"
+                                       TextWrapping="Wrap"
+                                       Margin="8" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Button Content="Remover selecionada"
+                        Command="{Binding RemoverCommand}"
+                        HorizontalAlignment="Stretch" />
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

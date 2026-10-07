@@ -1,0 +1,11 @@
+﻿<Solution>
+  <Project Path="ControleFinanceiroMulti.Android/ControleFinanceiroMulti.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="ControleFinanceiroMulti.Browser/ControleFinanceiroMulti.Browser.csproj" />
+  <Project Path="ControleFinanceiroMulti.Desktop/ControleFinanceiroMulti.Desktop.csproj" />
+  <Project Path="ControleFinanceiroMulti.iOS/ControleFinanceiroMulti.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="ControleFinanceiroMulti/ControleFinanceiroMulti.csproj" />
+</Solution>
